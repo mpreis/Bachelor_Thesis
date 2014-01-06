@@ -41,9 +41,14 @@
 		Martin Aigner \\ 
 		Christoph M. Kirsch \\
 		\bigskip
-		\textit{ACDC is an open-source benchmark that be configured to emulate explicit single- and multithreaded mutator behavior 
-		for measuring allocation, deallocation, and memory access throughput as well as memory consumption and multicore 
-		scalability of an allocator.}
+		What means ACDC?
+		\begin{itemize}
+			\item \textbf{AC} periodic memory allocation and deallocation
+			\item \textbf{DC} persistent memory
+		\end{itemize}	
+		%\textit{ACDC is an open-source benchmark that be configured to emulate explicit single- and multithreaded mutator behavior 
+		%for measuring allocation, deallocation, and memory access throughput as well as memory consumption and multicore 
+		%scalability of an allocator.}
 		
 	\end{frame}
 	
@@ -105,6 +110,7 @@
 				char *s = malloc(4*sizeof(char));
 				strncpy(s, "abc\0", 4);
 				...
+				dosomething(s);		// last access
 				free(s);
 			\end{lstlisting}			
 			
@@ -115,6 +121,7 @@
 				var s = "abc";
 				...
 				dosomething(s);		// last access
+				...
 			\end{lstlisting}	
 			
 	\end{frame}
@@ -122,21 +129,15 @@
 	\subsection{Garbage Collector} 
 	\begin{frame}
 		\frametitle{Garbage Collector}
-		\newtheorem{general problem}{General problem}
-		\begin{general problem}[] \label{gp:garbage_collector}
-			automatically finding whether some memory is not needed anymore
-		\end{general problem}
-		
 		\begin{itemize}
 			\item Embedded piece of software
 			\item Track memory allocation
-			\item Automatically free  
-			\item This process is an approximation
-			\item The general problem is undecidable
-			\begin{itemize}
-				\item decision problem for which it is impossible to construct a single algorithm that always leads to a correct yes-or-no answer
-			\end{itemize}
+			\item Automatically deallocate memory  
 		\end{itemize}
+		\newtheorem{general problem}{General problem}
+		\begin{general problem}[] \label{gp:garbage_collector}
+			automatically find all objects which are alive.
+		\end{general problem}
 	\end{frame}
 	
 	%-----------------------------------------------------------------------
@@ -159,9 +160,11 @@
 		\tableofcontents[currentsection]
 	\end{frame}
 
-	\subsection{Step 1: Get some data}
+	\newcounter{StepCounter}
+	\stepcounter{StepCounter}
+	\subsection{Step \theStepCounter: Get some data}
 	\begin{frame}
-		\frametitle{Step 1: Get some data}
+		\frametitle{Step \theStepCounter: Get some data}
 		\begin{itemize}
 			\item Get informations about the garbage collector (whitebox)
 			\begin{itemize}
@@ -190,19 +193,21 @@
 		\end{itemize}
 	\end{frame}
 	
-	\subsection{Step 2: Compare data}
-	\begin{frame}
-		\frametitle{Step 2: Compare data}
-		Compare as much as possible of the collected data with an other JavaScript engine.
-		\begin{itemize}
-			\item V8 (Google Chrome) vs. Spidermonkey (Mozilla Firefox)
-		\end{itemize} 
-		%\center{ \includegraphics[width=18em]{./imgs/acdc_multi_exec_time.eps} }
-	\end{frame}
+%	\stepcounter{StepCounter}
+%	\subsection{Step \theStepCounter: Compare data}
+%	\begin{frame}
+%		\frametitle{Step \theStepCounter: Compare data}
+%		Compare as much as possible of the collected data with an other JavaScript engine.
+%		\begin{itemize}
+%			\item V8 (Google Chrome) vs. Spidermonkey (Mozilla Firefox)
+%		\end{itemize} 
+%		%\center{ \includegraphics[width=18em]{./imgs/acdc_multi_exec_time.eps} }
+%	\end{frame}
 	
-	\subsection{Step 3: Heap model}
+	\stepcounter{StepCounter}
+	\subsection{Step \theStepCounter: Heap model}
 	\begin{frame}
-		\frametitle{Step 3: Heap model}
+		\frametitle{Step \theStepCounter: Heap model}
 		\begin{itemize}
 			\item Important for mutator implementation
 			\item Customizations
@@ -213,51 +218,17 @@
 			
 			\pause
 			
-			\item Tools for JavaScript heap analyzation
+			\item Tools for JavaScript heap analysis
 			\begin{itemize}
 				\item AutomatedUserInteraction
 				\item HeapSnapshotAnalyzer
 			\end{itemize}
 		\end{itemize}
 	\end{frame}
-
-	\subsubsection{Step 3: Heap model}
+	
 	\begin{frame}
-		\frametitle{Step 3: Heap model}		
+		\frametitle{Step \theStepCounter: Heap model}		
 		\includegraphics[width=26em]{./imgs/solution_h.pdf}
-	\end{frame}
-
-	\subsubsection{Customizations}
-	\begin{frame}
-		\frametitle{Customizations}
-		\begin{columns}
-			\begin{column}{.55\linewidth}
-				Custom Chromium binary
-				\begin{itemize}
-					\item Used flags
-					\begin{itemize}
-						\item \texttt{no\_sandbox} 						% Disables the sandbox for all process types that are normally sandboxed.
-					\end{itemize}
-				\end{itemize}
-			
-				Custom V8 binary
-				\begin{itemize}
-					\item New flags
-					\begin{itemize}
-						\item \texttt{automatic\_heap\_snapshots} 		% create heap snapshot automatically every heap-snapshot-interval KBs
-						\item \texttt{heap\_snapshot\_interval} 		% heap snapshot interval in KB
-						\item \texttt{heap\_snapshot\_prefix} 			% prefix for the .heapsnapshot files
-					\end{itemize}
-					\item Used flags
-					\begin{itemize}
-						\item \texttt{gc\_interval} 					% garbage collect after n allocations
-					\end{itemize}
-				\end{itemize}
-			\end{column}
-			\begin{column}{.35\linewidth}			
-				\includegraphics<1>[width=9em]{./imgs/chromium_v.pdf}
-			\end{column}
-		\end{columns}
 	\end{frame}
 
 	\subsubsection{AutomatedUserInteraction}
@@ -281,6 +252,49 @@
 		\end{itemize}
 	\end{frame}
 	
+	\begin{frame}
+		\frametitle{Step \theStepCounter: Heap model}		
+		\includegraphics[width=26em]{./imgs/solution_h.pdf}
+	\end{frame}
+
+	\subsubsection{Customizations}
+	\begin{frame}
+		\frametitle{Customizations}
+		%\begin{columns}
+		%	\begin{column}{.55\linewidth}
+				Custom Chromium binary
+				\begin{itemize}
+					\item Used flags
+					\begin{itemize}
+						\item \texttt{no\_sandbox} 						% Disables the sandbox for all process types that are normally sandboxed.
+					\end{itemize}
+				\end{itemize}
+			
+				Custom V8 binary
+				\begin{itemize}
+					\item New flags
+					\begin{itemize}
+						\item \texttt{automatic\_heap\_snapshots} 		% create heap snapshot automatically every heap-snapshot-interval KBs
+						\item \texttt{heap\_snapshot\_interval} 		% heap snapshot interval in KB
+						\item \texttt{heap\_snapshot\_prefix} 			% prefix for the .heapsnapshot files
+					\end{itemize}
+					\item Used flags
+					\begin{itemize}
+						\item \texttt{gc\_interval} 					% garbage collect after n allocations
+					\end{itemize}
+				\end{itemize}
+		%	\end{column}
+		%	\begin{column}{.35\linewidth}			
+		%		\includegraphics<1>[width=9em]{./imgs/chromium_v.pdf}
+		%	\end{column}
+		%\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Step \theStepCounter: Heap model}		
+		\includegraphics[width=26em]{./imgs/solution_h.pdf}
+	\end{frame}
+	
 	\subsubsection{HeapSnapshotAnalyzer}
 	\begin{frame}
 		\frametitle{HeapSnapshotAnalyzer}
@@ -291,7 +305,7 @@
 			
 			\pause
 			
-			\item Analyzation of the heap graph
+			\item Heap graph
 			\begin{itemize}
 				 \item Number of leafs
 				 \item Number of nodes
@@ -311,9 +325,15 @@
 		\end{itemize} 
 	\end{frame}
 	
-	\subsection{Step 4: JavaScript mutator}
 	\begin{frame}
-		\frametitle{Step 4: JavaScript mutator}
+		\frametitle{Step \theStepCounter: Heap model}		
+		\includegraphics[width=26em]{./imgs/solution_h.pdf}
+	\end{frame}
+	
+	\stepcounter{StepCounter}
+	\subsection{Step \theStepCounter: JavaScript mutator}
+	\begin{frame}
+		\frametitle{Step \theStepCounter: JavaScript mutator}
 %		Develop a universal JavaScript mutator based on the real web application analyzation results.  
 		Develop a 
 		\begin{itemize}
@@ -338,6 +358,18 @@
 	% CONCLUSION SECTION
 	%-----------------------------------------------------------------------
 	\section{Conclusion}
+	\subsection{Measurement results}
+	\begin{frame}
+		\frametitle{Measurement results}
+		\begin{center}
+			\includegraphics<1>[width=.9\textwidth]{./plots/keep_all_obj_rss_heap_mas_obj_time.eps}
+			\includegraphics<2>[width=.9\textwidth]{./plots/acdc_rss_heap_mas_obj_time.eps}
+			\includegraphics<3>[width=.9\textwidth]{./plots/acdc_multi_exec_time.eps}
+			%\includegraphics<4>[width=.9\textwidth]{./plots/nodes_edges_leaves.eps}
+		\end{center}
+	\end{frame}
+
+	\subsection{Measurement results}
 	\begin{frame}
 		\frametitle{Conclusion}
 		Done so far:
