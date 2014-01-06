@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[xcolor=x11names,compress]{beamer}
 
 \usetheme[pageofpages=of,
           alternativetitlepage=true,
@@ -52,7 +52,15 @@
 		\frametitle{Memory management}
 		\begin{columns}
 			\begin{column}{.1\linewidth}
-				\includegraphics[width=5.5em]{./imgs/memory.pdf}
+				\includegraphics<1>[width=5.5em]{./imgs/memory_0.pdf}
+				\includegraphics<2>[width=5.5em]{./imgs/memory_1.pdf}
+				\includegraphics<3>[width=5.5em]{./imgs/memory_2.pdf}
+				\includegraphics<4>[width=5.5em]{./imgs/memory_3.pdf}
+				\includegraphics<5>[width=5.5em]{./imgs/memory_4.pdf}
+				\includegraphics<6>[width=5.5em]{./imgs/memory_5.pdf}
+				\includegraphics<7>[width=5.5em]{./imgs/memory_6.pdf}
+				\includegraphics<8>[width=5.5em]{./imgs/memory_6.pdf}
+				\includegraphics<9>[width=5.5em]{./imgs/memory_6.pdf}
 			\end{column}
 			\begin{column}{.7\linewidth}
 				\begin{itemize}
@@ -65,7 +73,13 @@
 					\end{enumerate}
 				
 					\pause
-		
+					\pause
+					\pause
+					\pause
+					\pause
+					\pause
+					\pause
+					
 					\item Memory management in C
 					\begin{itemize}
 						\item \textbf{Allocation} \texttt{malloc()}
@@ -90,6 +104,7 @@
 				// C: allocates and deallocate memory for a string
 				char *s = malloc(4*sizeof(char));
 				strncpy(s, "abc\0", 4);
+				...
 				free(s);
 			\end{lstlisting}			
 			
@@ -98,6 +113,8 @@
 			\begin{lstlisting}[language=JavaScript]
 				// JS: allocates and deallocate memory for a string
 				var s = "abc";
+				...
+				dosomething(s);		// last access
 			\end{lstlisting}	
 			
 	\end{frame}
@@ -135,6 +152,13 @@
 	% SOLUTION SECTION
 	%-----------------------------------------------------------------------
 	\section{Solution}
+
+	\begin{frame}
+		\frametitle{Content}
+		\setcounter{tocdepth}{2}
+		\tableofcontents[currentsection]
+	\end{frame}
+
 	\subsection{Step 1: Get some data}
 	\begin{frame}
 		\frametitle{Step 1: Get some data}
@@ -173,7 +197,7 @@
 		\begin{itemize}
 			\item V8 (Google Chrome) vs. Spidermonkey (Mozilla Firefox)
 		\end{itemize} 
-		\center{ \includegraphics[width=18em]{./imgs/acdc_multi_exec_time}}
+		%\center{ \includegraphics[width=18em]{./imgs/acdc_multi_exec_time.eps} }
 	\end{frame}
 	
 	\subsection{Step 3: Heap model}
@@ -196,31 +220,44 @@
 			\end{itemize}
 		\end{itemize}
 	\end{frame}
-	
+
+	\subsubsection{Step 3: Heap model}
+	\begin{frame}
+		\frametitle{Step 3: Heap model}		
+		\includegraphics[width=26em]{./imgs/solution_h.pdf}
+	\end{frame}
+
 	\subsubsection{Customizations}
 	\begin{frame}
 		\frametitle{Customizations}
-		Custom Chromium binary
-		\begin{itemize}
-			\item Used flags
-			\begin{itemize}
-				\item \texttt{no\_sandbox} 						% Disables the sandbox for all process types that are normally sandboxed.
-			\end{itemize}
-		\end{itemize}
-	
-		Custom V8 binary
-		\begin{itemize}
-			\item New flags
-			\begin{itemize}
-				\item \texttt{automatic\_heap\_snapshots} 		% create heap snapshot automatically every heap-snapshot-interval KBs
-				\item \texttt{heap\_snapshot\_interval} 		% heap snapshot interval in KB
-				\item \texttt{heap\_snapshot\_prefix} 			% prefix for the .heapsnapshot files
-			\end{itemize}
-			\item Used flags
-			\begin{itemize}
-				\item \texttt{gc\_interval} 					% garbage collect after n allocations
-			\end{itemize}
-		\end{itemize}
+		\begin{columns}
+			\begin{column}{.55\linewidth}
+				Custom Chromium binary
+				\begin{itemize}
+					\item Used flags
+					\begin{itemize}
+						\item \texttt{no\_sandbox} 						% Disables the sandbox for all process types that are normally sandboxed.
+					\end{itemize}
+				\end{itemize}
+			
+				Custom V8 binary
+				\begin{itemize}
+					\item New flags
+					\begin{itemize}
+						\item \texttt{automatic\_heap\_snapshots} 		% create heap snapshot automatically every heap-snapshot-interval KBs
+						\item \texttt{heap\_snapshot\_interval} 		% heap snapshot interval in KB
+						\item \texttt{heap\_snapshot\_prefix} 			% prefix for the .heapsnapshot files
+					\end{itemize}
+					\item Used flags
+					\begin{itemize}
+						\item \texttt{gc\_interval} 					% garbage collect after n allocations
+					\end{itemize}
+				\end{itemize}
+			\end{column}
+			\begin{column}{.35\linewidth}			
+				\includegraphics<1>[width=9em]{./imgs/chromium_v.pdf}
+			\end{column}
+		\end{columns}
 	\end{frame}
 
 	\subsubsection{AutomatedUserInteraction}
@@ -280,16 +317,20 @@
 %		Develop a universal JavaScript mutator based on the real web application analyzation results.  
 		Develop a 
 		\begin{itemize}
-			\item universal JavaScript mutator
-			\item based on the original ACDC implementation.
+			\item Universal JavaScript mutator
+			\item Based on the original ACDC implementation.
 		\end{itemize}
 		
 		\pause
 		
 		Extend this mutator
 		\begin{itemize}
-			\item with special features for garbage collector measurements
-			\item based on the analysis results of the real web applications.
+			\item With special features for garbage collector measurements
+			\item Based on the analysis results simulate
+			\begin{itemize}
+				\item real web applications and
+				\item corner cases. 
+			\end{itemize}
 		\end{itemize}
 	\end{frame}
 	
