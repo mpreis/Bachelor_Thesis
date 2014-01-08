@@ -1,0 +1,113 @@
+%-------------------------------------------------------------------
+% bachelor thesis - presentation
+%
+% topic: ACDC4JS - How to analyze a JavaScript garbage collector
+%
+% create by: Mario Preishuber
+% create date: 2014, Jan 01.
+%-------------------------------------------------------------------
+\section{Introduction}	
+	\subsection{Memory management}
+	\begin{frame}
+		\frametitle{Memory management}
+		\begin{columns}
+			\begin{column}{.1\linewidth}
+				\includegraphics<1>[width=5.5em]{../imgs/memory_0.pdf}
+				\includegraphics<2>[width=5.5em]{../imgs/memory_1.pdf}
+				\includegraphics<3>[width=5.5em]{../imgs/memory_2.pdf}
+				\includegraphics<4>[width=5.5em]{../imgs/memory_3.pdf}
+				\includegraphics<5>[width=5.5em]{../imgs/memory_4.pdf}
+				\includegraphics<6>[width=5.5em]{../imgs/memory_5.pdf}
+				\includegraphics<7>[width=5.5em]{../imgs/memory_6.pdf}
+				\includegraphics<8>[width=5.5em]{../imgs/memory_6.pdf}
+				\includegraphics<9>[width=5.5em]{../imgs/memory_6.pdf}
+			\end{column}
+			\begin{column}{.7\linewidth}
+				\begin{itemize}
+					\item Typical memory structure
+					\begin{enumerate}
+						\item Program code
+						\item Constants (e.g. strings) 
+						\item Heap
+						\item Stack
+					\end{enumerate}
+				
+					\pause
+					\pause
+					\pause
+					\pause
+					\pause
+					\pause
+					\pause
+					
+					\item Memory management in C
+					\begin{itemize}
+						\item \textbf{Allocation} explicit with \texttt{malloc()}
+						\item \textbf{Deallocation} explicit with \texttt{free()}
+					\end{itemize}
+		
+					\pause
+		
+					\item Memory management in JavaScript
+					\begin{itemize}	
+						\item \textbf{Allocation} explicit / implicit
+						%\begin{itemize}
+						%	\item explicit with \texttt{new}
+						%	\item implicit with initialization 
+						%\end{itemize}
+						\item \textbf{Deallocation} implicit %with destroying references
+					\end{itemize}
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Memory management}
+		\begin{footnotesize}
+			\begin{lstlisting}[language=JavaScript]
+				// C
+				char *s = malloc(4*sizeof(char)); // explicit allocation
+				strncpy(s, "abc\0", 4);
+				...
+				access(s);
+				...
+				free(s);                          // explicit deallocation
+			\end{lstlisting}			
+			
+			\pause
+			
+			\begin{lstlisting}[language=JavaScript]
+				// JS
+				function dosomething() {
+				  var s = "abc";                  // implicit allocation
+				  ...
+				}                                 // collectable for GC 
+				
+				dosomething();
+			\end{lstlisting} %(unreachable implicit deallocation)
+		\end{footnotesize}		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Memory management}
+		TODO graphic!
+	\end{frame}
+	
+	\subsection{Garbage Collector} 
+	\begin{frame}
+		\frametitle{Garbage Collector}
+		\begin{itemize}
+			% live is an object since the allocation till the deallocation
+			% dead is an object since the deallocation
+			% unreachable is an object since there is NO MORE reference to it
+			\item differs between live memory and dead memory
+			\item deallocates dead memory for reuse
+			\item computes unreachable memory
+			\begin{itemize}
+				\item Tracing
+				\item Reference counting
+			\end{itemize}
+			\item free lists ...
+		\end{itemize}
+	\end{frame}
