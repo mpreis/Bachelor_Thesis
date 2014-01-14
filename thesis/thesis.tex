@@ -8,23 +8,31 @@
 %-------------------------------------------------------------------
 
 % add document settings
-\input{./extras/header.tex}
+%\input{./extras/header.tex}
+
+% add title
+\input{./extras/title}
 
 \begin{document}
-	
-	% add title
-	\input{./extras/title.tex}
+
+	\maketitle
+	\bibliographystyle{alpha}
 	
 	% add tables of content
-	\input{./extras/tablesofcontent.tex}
+	\input{./extras/tablesofcontent}
 	
 	% add abstract
 	\input{./extras/abstract}
 	
 	% add chapters
-	\input{./chapters/allchapters}
+	\input{./chapters/introduction}
+	\input{./chapters/acdc4js}
+	\input{./chapters/experiments}
+	\input{./chapters/relatedwork }
+	\input{./chapters/conclusion}
+	\input{./chapters/acknowledgments}
 	
 	% add references
-	\bibliography{./references/biblio.bib}
+	\bibliography{bac.bib}
 	
 \end{document}
