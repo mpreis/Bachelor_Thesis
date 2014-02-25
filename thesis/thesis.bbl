@@ -1,31 +1,47 @@
-\newcommand{\etalchar}[1]{$^{#1}$}
-\begin{thebibliography}{BBB{\etalchar{+}}13}
+\begin{thebibliography}{RGEV11}
 
-\bibitem[BBB{\etalchar{+}}13]{Sele13}
-Samit Badle, Jari Bakken, Alexei Barantsev, Erik Beans, Dounia Berrada,
-  Jennifer Bevan, Tarun Bhaduria, David Burns, Haw-Bin Chai, Jim Evans, Dan
-  Fabulich, Paul Grandjean, Adam Goucher, Philippe Hanrigou, Julian Harty,
-  András Hatvani, Jason Huggins, Dave Hunt, Ajay Kemparaj, Orion Ifland, Luke
-  Inman-Semerau, Shinya Kasatani, Leo Laskin, Jason Lebya, Patrick Lightbody,
-  Kevin Menard, Eran Messeri, Ross Patterson, François Reynaud, Kristian
-  Rosenvold, Nelson Sproul, Simon Stewart, Santiago Suarez~Ordoñez, Andreas
-  Tolf~Tolfsen, and Daniel Wagner-Hall.
-\newblock {SeleniumHQ}.
-\newblock \url{http://seleniumhq.org/}, 2013.
+\bibitem[AK13]{Aigner2013}
+Martin Aigner and Christoph~M. Kirsch.
+\newblock {ACDC: Towards a Universal Mutator for Benchmarking Heap Management
+  Systems}.
+\newblock In {\em Proceedings of the 2013 International Symposium on Memory
+  Management}, ISMM '13, pages 75--84. ACM, 2013.
 
-\bibitem[Gro13]{Psql13}
-The PostgreSQL Global~Development Group.
-\newblock {PostgreSQL}.
-\newblock \url{http://www.postgresql.org/}, 2013.
+\bibitem[Chr14a]{Chrome}
+{Chrome}, 2014.
 
-\bibitem[Lim13]{Econ13}
-The Economist~Newspaper Limited.
-\newblock {The Economist}.
-\newblock \url{http://www.economist.com/}, 2013.
+\bibitem[Chr14b]{Chromium}
+{Chromium}, 2014.
 
-\bibitem[TBS13]{Cnn13}
-Inc. Turner Broadcasting~System.
-\newblock {CNN}.
-\newblock \url{http://edition.cnn.com/}, 2013.
+\bibitem[Dev14]{DevTools}
+{Chrome DevTools}, 2014.
+
+\bibitem[LRSZ09]{JSMeter2009}
+Benjamin Livshits, Paruj Ratanaworabhan, David Simmons, and Benjamin~G. Zorn.
+\newblock {JSMeter: Characterizing Real-World Behavior of JavaScript Programs}.
+\newblock Technical report, Microsoft Research, 2009.
+
+\bibitem[PSQ13]{PSQL}
+{PostgreSQL}, 2013.
+
+\bibitem[RGEV11]{Richards2011}
+Gregor Richards, Andreas Gal, Brendan Eich, and Jan Vitek.
+\newblock {Automated Construction of JavaScript Benchmarks}.
+\newblock In {\em Proceedings of the 2011 ACM International Conference on
+  Object Oriented Programming Systems Languages and Applications}, OOPSLA '11,
+  pages 677--694. ACM, 2011.
+
+\bibitem[RLZ10]{JSMeter2010}
+Paruj Ratanaworabhan, Benjamin Livshits, and Benjamin~G. Zorn.
+\newblock {JSMeter: Comparing the Behavior of JavaScript Benchmarks with Real
+  Web Applications}.
+\newblock In {\em Proceedings of the 2010 USENIX Conference on Web Application
+  Development}, WebApps'10. USENIX Association, 2010.
+
+\bibitem[Sel14]{Selenium}
+{SeleniumHQ Browser Automation}, 2014.
+
+\bibitem[Tra13]{Trajan}
+{Tarjan's strongly connected components algorithm}, 2013.
 
 \end{thebibliography}

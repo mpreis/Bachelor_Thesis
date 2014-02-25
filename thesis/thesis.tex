@@ -1,8 +1,5 @@
 %-------------------------------------------------------------------
 % bachelor thesis
-%
-% topic: ACDC4JS - How to analyze a JavaScript garbage collector
-%
 % create by: Mario Preishuber
 % create date: 2014, Jan 01.
 %-------------------------------------------------------------------
@@ -10,29 +7,34 @@
 % add document settings
 %\input{./extras/header.tex}
 
+\makeatletter
+\def\input@path{{./extras/}{./chapters/}}
+\makeatother
+
 % add title
-\input{./extras/title}
+\input{title}
 
 \begin{document}
-
 	\maketitle
 	\bibliographystyle{alpha}
 	
 	% add tables of content
-	\input{./extras/tablesofcontent}
+	\input{tablesofcontent}
 	
 	% add abstract
-	\input{./extras/abstract}
+	\input{abstract}
 	
 	% add chapters
-	\input{./chapters/introduction}
-	\input{./chapters/acdc4js}
-	\input{./chapters/experiments}
-	\input{./chapters/relatedwork }
-	\input{./chapters/conclusion}
-	\input{./chapters/acknowledgments}
+	\input{introduction}
+	\input{analysis_tools}
+	\input{analysis_mutator}
+	\input{analysis_system}
+	\input{analysis_sys_vs_mut}
+	\input{conclusion}
 	
-	% add references
-	\bibliography{bac}
+	\appendix
+	\input{appendix}
+	
+	\bibliography{bac_strings,thesis}
 	
 \end{document}
