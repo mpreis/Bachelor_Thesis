@@ -6,9 +6,9 @@
 
 \section{System vs. Mutator} \label{sec:analysis_sys_vs_mut}
 
-In the previous sections we described our analysis results separated in system objects and mutator objects. We presented the differences and similarities distinguished by the type of the objects. In this section we compare system and mutator objects and do not care about the type of the objects. As explained in the section \ref{sec:analysis_mutator} are objects of type array, string, user-defined object, code, closure, regular expression (regexp), or number mutator objects. Objects of type hidden, native, or synthetic are system objects as described in section \ref{sec:analysis_system}. This analysis illustrate the overhead produced by Google's V8. 
+In the previous sections we described our analysis results separated in system heap and mutator heap. We presented the differences and similarities distinguished by the type of the objects. In this section we compare system and mutator objects and do not care about the type of the objects. As explained in Section \ref{sec:analysis_mutator} are objects of type array, string, user-defined object, code, closure, regular expression (regexp), or number are mutator objects. Objects of type hidden, native, or synthetic are system objects as described in Section \ref{sec:analysis_system}. This analysis illustrate the overhead produced by Google's V8. 
 
-Figure \ref{fig:obj_sysmut_alloc_dist} shows a histogram of the object distribution for all workloads. On the x-axis the workloads are listed and on the y-axis the relative amount of objects is displayed. This Figure shows that there are about 25\% of the allocated objects are system objects. As explained in section \ref{sec:analysis_system} most of these objects are of type hidden. 
+Figure \ref{fig:obj_sysmut_alloc_dist} shows a histogram of the object distribution for all workloads. On the x-axis the workloads are listed and on the y-axis the relative amount of objects is displayed. This Figure shows that there are about 25\% of the allocated objects are system objects. As explained in Section \ref{sec:analysis_system} most of these objects are of type hidden. 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{obj_sysmut_alloc_dist}
@@ -32,7 +32,7 @@ The lifetime distribution, illustrated by Figure \ref{fig:obj_sysmut_lieftiem_di
 	\label{fig:obj_sysmut_lieftiem_dist}
 \end{figure}
 
-Figure \ref{fig:obj_sysmut_rootdist_dist} presents the distribution of the root distance of all snapshots of all workloads separated in system and mutator objects. On the x-axis the minimum root distance is shown and on the y-axis the relative amount of objects with a root distance smaller than x is shown. The behavior of the system and mutator objects is extremely similar. We conclude that there might be a dependency of the position of system objects and the position of mutator objects in the heap graph. A reason could be that a user-defined objects has a reference the hidden class which represents the properties of a object.  
+Figure \ref{fig:obj_sysmut_rootdist_dist} presents the distribution of the root distance of all snapshots of all workloads separated in system and mutator objects. On the x-axis the minimum root distance is shown and on the y-axis the relative amount of objects with a root distance smaller than x is shown. The behavior of the system and mutator objects is extremely similar. We conclude that there might be a dependency of the position of system objects and the position of mutator objects in a heap graph. A reason could be that a user-defined objects has a reference the hidden class which represents the properties of a object.  
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{obj_sysmut_rootdist_dist}
