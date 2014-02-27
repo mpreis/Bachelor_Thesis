@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{11}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -10,6 +10,14 @@
 Benjamin Livshits, Paruj Ratanaworabhan, David Simmons, and Benjamin~G. Zorn.
 \newblock {JSMeter: Characterizing Real-World Behavior of JavaScript Programs}.
 \newblock Technical report, Microsoft Research, 2009.
+
+\bibitem[Chr(2014{\natexlab{a}})]{Chromium}
+{Chromium}, 2014{\natexlab{a}}.
+\newblock URL \url{http://www.chromium.org/}.
+
+\bibitem[V8(2013)]{V8}
+{V8}, 2013.
+\newblock URL \url{https://developers.google.com/v8/}.
 
 \bibitem[Ratanaworabhan et~al.(2010)Ratanaworabhan, Livshits, and
   Zorn]{JSMeter2010}
@@ -29,10 +37,6 @@ Gregor Richards, Andreas Gal, Brendan Eich, and Jan Vitek.
 \bibitem[Sel(2014)]{Selenium}
 {SeleniumHQ Browser Automation}, 2014.
 \newblock URL \url{http://docs.seleniumhq.org}.
-
-\bibitem[Chr(2014{\natexlab{a}})]{Chromium}
-{Chromium}, 2014{\natexlab{a}}.
-\newblock URL \url{http://www.chromium.org/}.
 
 \bibitem[Chr(2014{\natexlab{b}})]{Chrome}
 {Chrome}, 2014{\natexlab{b}}.

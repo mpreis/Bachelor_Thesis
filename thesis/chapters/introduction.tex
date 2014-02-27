@@ -1,11 +1,62 @@
-%-------------------------------------------------------------------
-% bachelor thesis
-% create by: Mario Preishuber
-% create date: 2014, Jan 01.
-%-------------------------------------------------------------------
+%------------------------------------------------------------------------------%
+% bachelor thesis															   %
+% create by: Mario Preishuber												   %
+% create date: 2014, Jan 01.												   %
+%------------------------------------------------------------------------------%
 
 \section{Introduction}
 
-\JS is essential in modern web development. Vendors of web browsers try to increase the performance of the implemented \JS virtual machines as good as possible. A reason for this intensive improvements is the large impact of \JS features on the user experience during visiting a web application. The responsibility for a well performing \JS virtual machine bears by the browser vendors. This leads to industry-standard benchmarking suites, which should help to optimize the \JS virtual machines. The problem is, studies, like \cite{JSMeter2009}, showed that these benchmarks do not represent a real-world web application behavior. If \JS virtual machines are optimized based on such benchmarks it might not improve the performance for realistic \JS heaps. To develop benchmarks which are able to simulate a behavior of a realistic web application it is necessary to know how a typical \JS heap looks like. 
+\JS is part of many modern web applications and became to an essential
+component of modern web development. Furthermore, \JS enables a dynamic,
+individual behavior of a web application what is important for the user
+experience. To realize such \JS intensive web applications it is necessary that
+a browser provides a well performing \JS virtual machine. Since \JS is a fully
+garbage collected programming language, like JAVA, the memory management is a
+task of the virtual machine. As a consequence, the performance of \JS virtual
+machines may be improved by improving their memory management performance. To
+be able to improve performance it requires better understanding performance
+deficiencies.
 
-We propose in this thesis our analysis results of \JS heaps of real-world web applications. In this work we present a way to analyze the heap of real-world web application as described in Section \ref{sec:analysis_tools}. This section explains the used tools, the list of obtained web applications, the performed user interactions, and some first measurements results. Section \ref{sec:analysis_mutator} presents the analysis results of the obtained web application. We call these web applications mutator as for garbage collector people common. Furthermore, in our case a mutator can be any possible \JS application. Section \ref{sec:analysis_system} shows by using the same metics as in Section \ref{sec:analysis_mutator} how the behavior of system objects looks like. System objects are objects which are not allocated by the mutator. The virtual machine creates these objects for different reasons. Note, we analyzed Google's V8, so the system objects only represent the unique behavior of V8. For instance there are so-called hidden classes which represent the properties of user-defined objects. At the end we compare the behavior of mutator objects and system objects in Section \ref{sec:analysis_sys_vs_mut} to illustrate the impact of the virtual machine on the \JS heap.
+There are industry-standard benchmarks suits to support implementation and
+optimization of \JS virtual machines, but studies, like \cite{JSMeter2009},
+illustrate that these benchmarks do not represent a real-world web application
+behavior. To optimize a \JS virtual machine a configurable and realistic
+benchmarking of memory management is needed. Realistic benchmarking is only
+possible if typical \JS heaps are known. This requires intensive analysis of
+\JS heaps of real-world applications.
+
+We propose our analysis results of \JS heaps of real-world applications. Our
+analysis results can be used to implement a realistic benchmark which is able
+to simulate a real-world \JS heap. We observe 11 real-world web applications
+which are similar to those of \cite{JSMeter2009}. To extract information about
+the \JS heap we used a sampling mechanism which frequent generates a snapshot
+of the current \JS heap. This snapshotting functionality is integrated in
+Google's Chromium \cite{Chromium} virtual machine V8 \cite{V8}. Depending on
+the observed real-world application we perform different user interactions, the
+complete list is presented by Table \ref{tab:real_world_apps}. During executing
+such an user interaction snapshots a generated. Section
+\ref{sec:analysis_tools} describes in detail the tool chain we used to generate
+and analyze snapshots. We analyze these snapshots about structure and 
+distributions of object properties. Our analysis is separated in three parts.
+
+The first one, Section \ref{sec:analysis_mutator}, analyzes only the mutator
+heap. A mutator is the common word of garbage collector people for any possible
+application. In this section we only observe a subset of objects which are
+allocated by the mutator and separated them by type.
+
+The second part, Section \ref{sec:analysis_system}, takes a closer look at the
+system heap. There are special object types which are allocated by the virtual
+machine. All objects of these special type represent the system heap. These
+objects are also part of a snapshot this allows us to use the same metics as in
+Section \ref{sec:analysis_mutator}. We separate the objects again by type.
+
+The third part, Section \ref{sec:analysis_sys_vs_mut}, compares the mutator and
+the system heap. This analysis present differences and equalities of mutator
+and system object distributions. In this section the objects are not separated
+by there type instead we distinguish system and mutator objects. Our analysis
+of this section illustrate the overhead which is produced by V8.
+
+In this work we extend studies on the allocation behavior of real \JS web
+applications \cite{JSMeter2009}. This thesis makes the following contribution:
+An analysis of popular and \JS-intensive real-world web applications to obtain
+realistic distributions of object properties and heap structure properties.
