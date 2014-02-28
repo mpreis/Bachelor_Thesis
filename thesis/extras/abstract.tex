@@ -10,29 +10,45 @@
 \begin{tabular}{c}
 \parbox{0.7\linewidth}{
 
-Improving the performance of a \JS virtual machines is a hot topic. There are
-industry-standard benchmark suites to support implementation and optimization
-of \JS virtual machines, but studies, like \cite{JSMeter2009}, illustrate that
-these benchmarks do not represent a real-world web application behavior. Since
-\JS is a garbage collected programming language improving performance of the
-memory management of a \JS virtual machine may improve performance in general.
-To be able to improve performance it requires better understanding performance
-deficiencies. To optimize a \JS virtual machine a configurable and realistic
-benchmarking of memory management is needed. Realistic benchmarking is only
-possible if typical \JS heaps are known. This requires intensive analysis of
-\JS heaps of real-world applications.
 
-We propose our analysis results of \JS heaps of real-world applications. Our
-analysis results support developer to implement realistic benchmarking suites
-which are able to simulate realistic \JS heap behavior. We study 11 popular
-real-world web applications. Depending on the analyzed application we executed
-different user interactions. We use a sampling mechanism to generate a snapshot
-of the current \JS heap at periodic intervals. We analyze these snapshots about
-structure and distributions of object properties.
+    \JS performance is a hot topic for pushing the boundaries of web
+    applications.  Today, browser vendors compare to each other mainly on \JS
+    benchmark scores rather than other web browsing features. However, recent
+    studies~\cite{JSMeter2009} suggest that popular benchmarking suites do not
+    reflect the behavior of real web applications.  We present an extensive
+    analysis of \JS heaps in 11 real-world web applications to aid the
+    development of more realistic workloads for benchmarking the memory
+    management of \JS virtual machines. In this thesis, we confirm empirical
+    results on object type and object lifetime distribution~\cite{JSMeter2009}
+    and contribute new insights on object size distribution as well as heap
+    structure properties. TODO: eventuall kannst du hier noch einen Satz anbringen
+    der die Ergebnisse beschreibt. Aber nicht mehr als ein Satz. Sowas wie:
+    Our results suggest that \JS applications typically allocate mostly
+    small and short living objects and that blablabla is more likely than bla.
 
-This thesis present an analysis of popular and \JS-intensive real-world web
-applications to obtain realistic distributions of object properties and heap
-structure properties.
+%Improving the performance of a \JS virtual machines is a hot topic. There are
+%industry-standard benchmark suites to support implementation and optimization
+%of \JS virtual machines, but studies, like \cite{JSMeter2009}, illustrate that
+%these benchmarks do not represent a real-world web application behavior. Since
+%\JS is a garbage collected programming language improving performance of the
+%memory management of a \JS virtual machine may improve performance in general.
+%To be able to improve performance it requires better understanding performance
+%deficiencies. To optimize a \JS virtual machine a configurable and realistic
+%benchmarking of memory management is needed. Realistic benchmarking is only
+%possible if typical \JS heaps are known. This requires intensive analysis of
+%\JS heaps of real-world applications.
+
+%We propose our analysis results of \JS heaps of real-world applications. Our
+%analysis results support developer to implement realistic benchmarking suites
+%which are able to simulate realistic \JS heap behavior. We study 11 popular
+%real-world web applications. Depending on the analyzed application we executed
+%different user interactions. We use a sampling mechanism to generate a snapshot
+%of the current \JS heap at periodic intervals. We analyze these snapshots about
+%structure and distributions of object properties.
+
+%This thesis present an analysis of popular and \JS-intensive real-world web
+%applications to obtain realistic distributions of object properties and heap
+%structure properties.
 
 }
 \end{tabular}
