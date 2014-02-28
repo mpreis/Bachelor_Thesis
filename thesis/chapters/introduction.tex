@@ -10,48 +10,49 @@
 component of modern web development. Furthermore, \JS enables a dynamic,
 individual behavior of a web application what is important for the user
 experience. To realize such \JS intensive web applications it is necessary that
-a browser provides a well performing \JS virtual machine. Since \JS is a fully
-garbage collected programming language, like JAVA, the memory management is a
+a browser provides a well performing \JS virtual machine. Since \JS is a
+garbage collected programming language, like Java, the memory management is a
 task of the virtual machine. As a consequence, the performance of \JS virtual
 machines may be improved by improving their memory management performance. To
 be able to improve performance it requires better understanding performance
 deficiencies.
 
-There are industry-standard benchmarks suits to support implementation and
+There are industry-standard benchmark suites to support implementation and
 optimization of \JS virtual machines, but studies, like \cite{JSMeter2009},
 illustrate that these benchmarks do not represent a real-world web application
 behavior. To optimize a \JS virtual machine a configurable and realistic
 benchmarking of memory management is needed. Realistic benchmarking is only
-possible if typical \JS heaps are known. This requires intensive analysis of
+possible if typical \JS heaps are known. This requires intensive analyses of
 \JS heaps of real-world applications.
 
 We propose our analysis results of \JS heaps of real-world applications. Our
-analysis results can be used to implement a realistic benchmark which is able
-to simulate a real-world \JS heap. We observe 11 real-world web applications
+analysis results can be used to implement a benchmark which is able
+to simulate a realistic \JS heap. We study 11 real-world web applications
 which are similar to those of \cite{JSMeter2009}. To extract information about
-the \JS heap we used a sampling mechanism which frequent generates a snapshot
-of the current \JS heap. This snapshotting functionality is integrated in
-Google's Chromium \cite{Chromium} virtual machine V8 \cite{V8}. Depending on
-the observed real-world application we perform different user interactions, the
-complete list is presented by Table \ref{tab:real_world_apps}. During executing
-such an user interaction snapshots a generated. Section
-\ref{sec:analysis_tools} describes in detail the tool chain we used to generate
-and analyze snapshots. We analyze these snapshots about structure and 
-distributions of object properties. Our analysis is separated in three parts.
+the \JS heap we use a sampling mechanism which periodic generates a snapshot
+of the current \JS heap, i.e., every $ n $ allocated byte a snapshot is taken. The value
+of $ n $ is configurable and represents the mount of memory which has to be
+allocated by the mutator before another snapshot is taken. This snapshotting
+functionality is integrated in Google's Chromium \cite{Chromium} virtual
+machine V8 \cite{V8}. Depending on the analyzed real-world application we
+perform different user interactions, the complete list is presented by Table
+\ref{tab:real_world_apps}. During executing such an user interaction snapshots
+are generated. Section \ref{sec:analysis_tools} describes in detail the tool
+chain we used to generate and analyze snapshots. We analyze these snapshots
+about structure and distributions of object properties. Our analysis is
+separated in three parts.
 
 The first one, Section \ref{sec:analysis_mutator}, analyzes only the mutator
 heap. A mutator is the common word of garbage collector people for any possible
-application. In this section we only observe a subset of objects which are
-allocated by the mutator and separated them by type.
+application. In this section we only study a subset of objects which are
+allocated by the mutator and separated by type.
 
 The second part, Section \ref{sec:analysis_system}, takes a closer look at the
 system heap. There are special object types which are allocated by the virtual
-machine. All objects of these special type represent the system heap. These
-objects are also part of a snapshot this allows us to use the same metics as in
-Section \ref{sec:analysis_mutator}. We separate the objects again by type.
+machine. All objects of these special types represent the system heap. We use the same metrics as in Section \ref{sec:analysis_mutator}, because these objects are also part of a snapshot. We separate these objects again by type.
 
 The third part, Section \ref{sec:analysis_sys_vs_mut}, compares the mutator and
-the system heap. This analysis present differences and equalities of mutator
+the system heap. This analysis presents differences and equalities of mutator
 and system object distributions. In this section the objects are not separated
 by there type instead we distinguish system and mutator objects. Our analysis
 of this section illustrate the overhead which is produced by V8.
