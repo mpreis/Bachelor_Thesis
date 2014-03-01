@@ -6,30 +6,30 @@
 
 \section{Introduction}
 
-\JS is part of many modern web applications and became to an essential
+\JS is part of many modern web applications and became an essential
 component of modern web development. To realize \JS-intensive web applications
 it is necessary that a browser provides a well performing \JS virtual machine.
 Since \JS is a garbage collected programming language, like Java, the memory
 management is a task of the virtual machine. As a consequence, the performance
-of \JS virtual machines may be improved by improving their memory management
-performance. To be able to improve performance it requires better understanding
+of \JS virtual machines may be enhanced by improving their memory management
+performance. To be able to emend performance, it requires better understanding
 performance deficiencies. There are industry-standard benchmark suites to
 support implementation and optimization of \JS virtual machines, but studies,
-like \cite{JSMeter2009}, illustrate that these benchmarks do not represent a
-real-world web application behavior. To optimize a \JS virtual machine a
+like \cite{JSMeter2009} illustrate that these benchmarks do not represent a
+real-world web application behavior. To optimize a \JS virtual machine, a
 configurable and realistic benchmarking of memory management is needed.
 Realistic benchmarking is only possible if typical \JS heaps are known.
 
 We propose our analysis results of \JS heaps of real-world applications. First
 we integrated a snapshotting functionality in Google's Chromium \cite{Chromium}
 virtual machine V8 \cite{V8}. This mechanism periodic generates a snapshot of
-the current \JS heap. Further, we study 11 real-world web applications which
+the current \JS heap. Further we studied 11 real-world web applications which
 are similar to those of \cite{JSMeter2009}. Depending on the analyzed
-application we perform different user interactions, the complete list is
-presented by Table \ref{tab:real_world_apps}. Finally, we analyze these
+application we performed different user interactions, the complete list is
+presented by Table \ref{tab:real_world_apps}. Finally, we analyzed these
 snapshots about structure and distributions of object properties. Section
-\ref{sec:analysis_tools} describes in detail the tool chain we used to generate
-and analyze snapshots.
+\ref{sec:analysis_tools} describes the tool chain, we used to generate
+and analyze snapshots, in detail.
 
 If you analyze such a heap snapshot, there is to consider that a snapshot
 contains objects which are allocated by a mutator and objects allocated by the
@@ -44,7 +44,7 @@ differences and equalities of mutator and system heap. These steps illustrate
 the allocation behavior of real-world web applications and present the overhead
 of V8.
 
-In this work we extend studies on the allocation behavior of real \JS web
+In this work we extended studies on the allocation behavior of real \JS web
 applications \cite{JSMeter2009}. This thesis makes the following contribution:
 An analysis of popular and \JS-intensive real-world web applications to obtain
 realistic distributions of object properties and heap structure properties.
