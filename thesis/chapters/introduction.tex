@@ -6,69 +6,48 @@
 
 \section{Introduction}
 
-\JS is part of many modern web applications and became an essential
-component of modern web development. To realize \JS-intensive web applications
-it is necessary that a browser provides a well performing \JS virtual machine.
-Since \JS is a garbage collected programming language, like Java, the memory
-management is a task of the virtual machine. As a consequence, the performance
-of \JS virtual machines may be enhanced by improving their memory management
-performance. To be able to emend performance, it requires better understanding
-performance deficiencies. There are industry-standard benchmark suites to
-support implementation and optimization of \JS virtual machines, but studies,
-like \cite{JSMeter2009} illustrate that these benchmarks do not represent a
-real-world web application behavior. To optimize a \JS virtual machine, a
-configurable and realistic benchmarking of memory management is needed.
-Realistic benchmarking is only possible if typical \JS heaps are known.
+\JS is part of many modern web applications and became an essential component
+of modern web development. For \JS-intensive web applications it is
+necessary that a browser provides a well performing \JS virtual machine. Since
+\JS is a garbage collected programming language the memory management is a task
+of the virtual machine. As a consequence, the performance of \JS virtual
+machines may be enhanced by improving memory management performance. This
+requires a better understanding of performance deficiencies.
+
+Industry-standard benchmark suites support implementation and optimization of
+\JS virtual machines, but studies, like \cite{JSMeter2009} illustrate that
+these benchmarks do not represent a real-world web application behavior. To
+optimize a \JS virtual machine, a configurable and realistic benchmarking of
+memory management is needed. Realistic benchmarking is only possible if typical
+\JS heaps are known.
 
 We propose our analysis results of \JS heaps of real-world applications. First
 we integrated a snapshotting functionality in Google's Chromium \cite{Chromium}
-virtual machine V8 \cite{V8}. This mechanism periodic generates a snapshot of
-the current \JS heap. Further we studied 11 real-world web applications which
-are similar to those of \cite{JSMeter2009}. Depending on the analyzed
-application we performed different user interactions, the complete list is
-presented by Table \ref{tab:real_world_apps}. Finally, we analyzed these
-snapshots about structure and distributions of object properties. Section
-\ref{sec:analysis_tools} describes the tool chain, we used to generate
-and analyze snapshots, in detail.
+virtual machine V8 \cite{V8}. This mechanism periodically generates a snapshot
+of the current \JS heap. We have studied 11 real-world web applications which
+are similar to those in \cite{JSMeter2009}. Depending on the analyzed
+application we performed different user interactions. The complete list of the
+applications and user interactions is presented in Table
+\ref{tab:real_world_apps}. Finally, we analyzed the structure and distributions
+of object properties of these snapshots. Section \ref{sec:analysis_tools}
+describes the tool chain we have used to generate and analyze snapshots in
+detail.
 
-If you analyze such a heap snapshot, there is to consider that a snapshot
-contains objects which are allocated by a mutator and objects allocated by the
-\JS virtual machine. A mutator is the common word of garbage collector people
-for any possible application. First, Section \ref{sec:analysis_mutator},
-analyzes only objects allocated by a mutator, the so-called mutator heap.
-Further, Section \ref{sec:analysis_system}, takes a closer look at the objects
-allocated by the virtual machine, the so-called system heap. In section
-\ref{sec:analysis_mutator} and \ref{sec:analysis_system} we separated the
-objects by type. Finally, section \ref{sec:analysis_sys_vs_mut} presents
-differences and equalities of mutator and system heap. These steps illustrate
-the allocation behavior of real-world web applications and present the overhead
-of V8.
+The heap snapshots contain objects allocated by the \JS program (called mutator
+on garbage collection terminology) and objects allocated by the virtual
+machine. Section \ref{sec:analysis_mutator} describes our analysis of objects
+allocated by a mutator, the so-called mutator heap and Section
+\ref{sec:analysis_system}, takes a closer look at the objects allocated by the
+virtual machine, the so-called system heap. Finally, section
+\ref{sec:analysis_sys_vs_mut} presents differences and similarities of mutator
+and system heap. For both, mutator and virtual machine allocated objects, we
+have analyzed the following properties and their distributions: object type,
+size, lifetime, the number of outgoing edges, and the minimum distance from a
+heap root to a object. This illustrates the allocation behavior of real-world
+web applications and present the overhead of V8.
 
 In this work we extended studies on the allocation behavior of real \JS web
 applications \cite{JSMeter2009}. This thesis makes the following contribution:
 An analysis of popular and \JS-intensive real-world web applications to obtain
 realistic distributions of object properties and heap structure properties.
 
-
-%This requires intensive analyses of
-%\JS heaps of real-world applications.
-% 
-% To extract information about the \JS heap we use a sampling
-% mechanism which periodic generates a snapshot of the current \JS heap, i.e.,
-% every $ n $ allocated byte a snapshot is taken. The value of $ n $ is
-% configurable and represents the amount of memory which has to be allocated by
-% the mutator before another snapshot is taken. 
-% 
-% During executing such an user interaction snapshots
-% are generated.
-% 
-% We use the same metrics as in Section \ref{sec:analysis_mutator}, because these objects are also part of a snapshot. We separate these objects again by type.
-
-% The third part, Section \ref{sec:analysis_sys_vs_mut}, compares the mutator and
-% the system heap. This analysis presents differences and equalities of mutator
-% and system object distributions. In this section the objects are not separated
-% by there type instead we distinguish system and mutator objects. Our analysis
-% of this section illustrate the overhead which is produced by V8.
-% 
-% Our analysis results can be used to implement a benchmark which is able to
-% simulate a realistic \JS heap.
