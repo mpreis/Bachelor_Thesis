@@ -4,7 +4,7 @@
 % create date: 2014, Jan 01.												   %
 %------------------------------------------------------------------------------%
 
-\documentclass[10pt,fleqn, titlepage]{article}
+\documentclass[10pt,fleqn, pagenumbers]{proc}
 \usepackage{oldgerm}
 \usepackage{graphicx}
 \usepackage{xspace}
@@ -71,20 +71,21 @@
 	\input{tablesofcontent}
 	
 	% add abstract
-	\input{abstract}
+	\input{abstract_2_col}
 	
 	% add chapters
 	\input{introduction}
-	\input{analysis_tools}
-	\input{analysis_mutator}
+	\input{analysis_tools_2_col}
+	\input{analysis_mutator_2_col}
 	\input{analysis_system}
 	\input{analysis_sys_vs_mut}
 	\input{conclusion}
 	\input{acknowledgments}
 	
 	\appendix
-	\input{appendix}
+	\input{appendix_2_col}
 	
+	\newpage
 	\bibliography{bac_strings,thesis}
 	
 \end{document}
