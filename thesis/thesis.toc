@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {2}Analysis Tools}{1}
+\contentsline {subsection}{\numberline {2.1}Simple, artificial mutator}{1}
+\contentsline {subsection}{\numberline {2.2}Tools for obtaining a realistic heap model}{3}
+\contentsline {subsubsection}{\numberline {2.2.1}Tool for automating user interaction}{3}
+\contentsline {subsubsection}{\numberline {2.2.2}Custom Chromium}{3}
+\contentsline {subsubsection}{\numberline {2.2.3}Tool for analyzing heap snapshots}{5}
+\contentsline {section}{\numberline {3}Mutator Heap Analysis}{5}
+\contentsline {section}{\numberline {4}System Heap Analysis}{9}
+\contentsline {section}{\numberline {5}System vs. Mutator}{11}
+\contentsline {section}{\numberline {6}Conclusions}{14}
+\contentsline {section}{\numberline {7}Acknowledgments}{14}
+\contentsline {section}{\numberline {A}Appendix}{14}

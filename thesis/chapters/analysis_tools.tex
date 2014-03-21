@@ -8,16 +8,16 @@
 
 \subsection{Simple, artificial mutator}
 
-We started our research with some simple, artificial mutators. Our aim was to get an overview of the behavior of different \JS garbage collectors. Therefore we used three different mutators, which
+We started our research with some simple, artificial mutators. Our aim was to get an overview of the behavior of different \JS garbage collectors. Therefore, we used three different mutators, which
 \begin{itemize}
 	\item Only allocate short living objects,
 	\item Only allocate long living objects, and 
 	\item A combination of the two above
 \end{itemize}
-With these three mutators we started our measurements. We differ between so-called \textit{blackbox} and \textit{whitebox} data. The \textit{blackbox} data cover the execution time of a mutator and the real memory (resident set size) used of a mutator process. The \textit{whitebox} data require information about the \JS virtual machine. We get these information from Google's V8. These data contain information about heapsize, garbage collector frequency, and amount of memory which is collected (in byte).
+With these three mutators we started our measurements. We differ between so-called \textit{blackbox} and \textit{white-box} data. The \textit{blackbox} data cover the execution time of a mutator and the real memory (resident set size) used of a mutator process. The \textit{white-box} data require information about the \JS virtual machine. We get these information from Google's V8. This data contain information about heap size, garbage collector frequency, and amount of memory that is collected (in byte).
 
 \
-Figure \ref{fig:mutator_keep_all_obj} presents measures of such a simple mutator. This mutator only allocates objects and keeps them live until the mutator terminates. The y-axis on the left shows the memory in MB and is used for the heapsize (heap), resident set size (rss), and mark and sweep (mark-sweep). The y-axis on the right shows the number of live objects in thousands and on the x-axis the real time is displayed. Live objects are objects which are not collected by the garbage collector yet. For the live objects we expect a linear growing, but the Figure shows that the allocation of objects sometimes pauses which is a result of garbage collection. If we look at the resident set size and the heapsize we see the dependency between these. The heapsize presents more details about the garbage collection. The little spikes represent the collection of short living objects. In our case this behavior shows a collection of system objects, because the mutator does not deallocate any objects. The bigger negative going flanks represent a mark and sweep phase of the garbage collector. A mark and sweep phase shows the collection of long living objects. This simple mutator allows us to show some of the characteristics of a garbage collector.
+Figure \ref{fig:mutator_keep_all_obj} presents measures of such a simple mutator. This mutator only allocates objects and keeps them live until the mutator terminates. The y-axis on the left shows the memory in MB and is used for the heap size (heap), resident set size (rss), and mark and sweep (mark-sweep). The y-axis on the right shows the number of live objects in thousands and on the x-axis the real time is displayed. Live objects are objects which are not collected by the garbage collector yet. For the live objects we expect a linear growing, but the Figure shows that the allocation of objects sometimes pauses which is a result of garbage collection. If we look at the resident set size and the heap size we see the dependency between these. The heap size presents more details about the garbage collection. The little spikes represent the collection of short living objects. In our case this behavior shows a collection of system objects, because the mutator does not deallocate any objects. The bigger negative going flanks represent a mark and sweep phase of the garbage collector. A mark and sweep phase shows the collection of long living objects. This simple mutator allows us to show some of the characteristics of a garbage collector.
 
 \begin{figure}
 	\centering
@@ -27,7 +27,7 @@ Figure \ref{fig:mutator_keep_all_obj} presents measures of such a simple mutator
 \end{figure}
 
 \
-Figure \ref{fig:acdc_multi_exec_time} presents the execution time of a mutator which frequently deallocates a static amount of memory. We increase the lifetime of the allocated objects and measure the execution time. The lifetime is the duration since a object is allocated until it is deallocated. The so-called liveness of a object is similar to the lifetime. The x-axis of the Figure shows the maximum liveness of the allocated objects and on the y-axis the execution time is displayed. A comparison of Google's V8 with Mozilla's \SM shows significant differences. If we look at the line of V8 we see some big spikes at a liveness of 30, 60, and 90. A reason for these spikes is the communication with the operating system. If the heap size of V8 overruns one of the internal bounds the process requests more memory from the operating system. If the heap size falls below such a bound the process responses memory to the operating system. In our case the heap size is toggling around such bounds. As a result there is a lot more communication with the operation system than usually which has a large impact on the execution time of the mutator.
+Figure \ref{fig:acdc_multi_exec_time} presents the execution time of a mutator which frequently deallocates a static amount of memory. We increase the lifetime of the allocated objects and measure the execution time. The lifetime is the duration since a object is allocated until it is deallocated. The so-called liveness of a object is similar to the lifetime. The x-axis of the figure shows the maximum liveness of the allocated objects and on the y-axis the execution time is displayed. A comparison of Google's V8 with Mozilla's \SM shows significant differences. If we look at the line of V8 we see some big spikes at a liveness of 30, 60, and 90. A reason for these spikes is the communication with the operating system. If the heap size of V8 overruns one of the internal bounds the process requests more memory from the operating system. If the heap size falls below such a bound the process responses memory to the operating system. In our case the heap size is toggling around such bounds. As a result there is a lot more communication with the operation system than usually which has a large impact on the execution time of the mutator.
 
 \
 The conclusion of our first mutator measurements is, that we are able to visualize characteristics of a garbage collector. Furthermore, we can show differences between different virtual machines. These mutators represent some corner cases, and if we think of an realistic \JS application there will be a different behavior.
@@ -56,7 +56,7 @@ For the simulation of a realistic user interaction on a real-world application w
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{solution_h}
-	\caption{Tool chain to analyze the JavaScript heap of a real-world web application}
+	\caption{Tool chain for analyzing the JavaScript heap of a real-world web application}
 	\label{fig:heap_structure_analysis}
 \end{figure}
 
@@ -65,7 +65,7 @@ For the simulation of a realistic user interaction on a real-world application w
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-\subsubsection{AutomatedUserInteraction} \label{sec:automated_user_interaction}
+\subsubsection{Tool for automating user interaction} \label{sec:automated_user_interaction}
 To simulate a realistic user interaction we decided to automate this process by using Selenium \cite{Selenium}. A benefit of using Selenium is that we are able to repeat a user interaction as often as we want in exact the same way. Selenium also enables the opportunity to use different browsers. This feature allows us to run a user interaction on different browsers or use our own browser binary in a very easy way. For the heap snapshot generation we used our own customized Chromium binary (for details see Section \ref{sec:custom_chromium}). The Table \ref{tab:real_world_apps} shows all these real-world applications and the user interaction we performed. 
 
 \begin{table}
@@ -84,10 +84,10 @@ To simulate a realistic user interaction we decided to automate this process by 
 		ESPN 					& Read start page news, switch to \textit{NASCAR}, 		 				\\ 
 		\url{espn.com} 			& click on \textit{Results} and read site. 								\\ \midrule
 
-		Hotmail 				& Sign in, check inbox, send email, read an email,						\\ 
+		Hotmail 				& Sign in, check in-box, send email, read an email,						\\ 
 		\url{hotmail.com} 		& delete it, and sign out. 												\\ \midrule
 
-		Gmail 					& Sign in, check inbox, send email, read an email, 						\\ 
+		Gmail 					& Sign in, check in-box, send email, read an email, 						\\ 
 		\url{www.gmail.com} 	& delete it, and sign out. 												\\ \midrule
 
 		Bing Search 			& Search for \textit{New York} and look at 								\\ 
@@ -138,7 +138,7 @@ The \texttt{automatic heap snapshots} flag enables the generation of snapshots i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{HeapSnapshotAnalyzer} \label{sec:heap_snapshot_analyzer}
+\subsubsection{Tool for analyzing heap snapshots} \label{sec:heap_snapshot_analyzer}
 The steps before describe how we capture data about a realistic \JS heap. Now we want to explain how we analyzed the generated snapshots. 
 
 For each real-world application, listed in Table \ref{tab:real_world_apps}, we used a sample rate of 4KB, i.e., a snapshot is created whenever 4KB of new objects are allocated by the application. The number of generated snapshots depends on the amount of memory which is allocated by a real-world application and the runtime of a user interaction. When a heap snapshot is taken the garbage collector is automatically called. As a result a snapshot only contains live objects. 

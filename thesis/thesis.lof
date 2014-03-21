@@ -1,0 +1,18 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Simple mutator which only allocates objects and never deallocates.\relax }}{2}
+\contentsline {figure}{\numberline {2}{\ignorespaces Execution time: V8 vs. SpiderMonkey\relax }}{2}
+\contentsline {figure}{\numberline {3}{\ignorespaces Tool chain for analyzing the JavaScript heap of a real-world web application\relax }}{3}
+\contentsline {figure}{\numberline {4}{\ignorespaces Histogram of the object type distribution for all workloads, confirms \cite {JSMeter2009}.\relax }}{6}
+\contentsline {figure}{\numberline {5}{\ignorespaces Size distribution of real web applications, confirms \cite {JSMeter2009}.\relax }}{6}
+\contentsline {figure}{\numberline {6}{\ignorespaces Lifetime distribution of real web applications, confirms \cite {JSMeter2009}.\relax }}{7}
+\contentsline {figure}{\numberline {7}{\ignorespaces GC root distance distribution of real web applications, confirms \cite {JSMeter2009}.\relax }}{7}
+\contentsline {figure}{\numberline {8}{\ignorespaces Out-degree distribution of real web applications, confirms \cite {JSMeter2009}.\relax }}{8}
+\contentsline {figure}{\numberline {9}{\ignorespaces In-degree distribution of real web applications, confirms \cite {JSMeter2009}.\relax }}{8}
+\contentsline {figure}{\numberline {10}{\ignorespaces Size distribution of real web applications.\relax }}{10}
+\contentsline {figure}{\numberline {11}{\ignorespaces Lifetime distribution of real web applications.\relax }}{10}
+\contentsline {figure}{\numberline {12}{\ignorespaces Root distance distribution of real web applications.\relax }}{10}
+\contentsline {figure}{\numberline {13}{\ignorespaces Out-degree distribution of real web applications.\relax }}{11}
+\contentsline {figure}{\numberline {14}{\ignorespaces Histogram of the object distribution for all workloads.\relax }}{11}
+\contentsline {figure}{\numberline {15}{\ignorespaces Out-degree distribution of real web applications.\relax }}{12}
+\contentsline {figure}{\numberline {16}{\ignorespaces Lifetime distribution of real web applications.\relax }}{12}
+\contentsline {figure}{\numberline {17}{\ignorespaces Root distance distribution of real web applications.\relax }}{13}
+\contentsline {figure}{\numberline {18}{\ignorespaces Size distribution of real web applications.\relax }}{13}
