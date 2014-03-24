@@ -22,16 +22,16 @@ memory management is needed. Realistic benchmarking is only possible if typical
 \JS heaps are known.
 
 We propose our analysis results of \JS heaps of real-world applications. First
-we integrated a snapshotting functionality in Google's Chromium \cite{Chromium}
-virtual machine V8 \cite{V8}. This mechanism periodically generates a snapshot
-of the current \JS heap. We have studied 11 real-world web applications which
-are similar to those in \cite{JSMeter2009}. Depending on the analyzed
-application we performed different user interactions. The complete list of the
-applications and user interactions is presented in Table
-\ref{tab:real_world_apps}. Finally, we analyzed the structure and distributions
-of object properties of these snapshots. Section \ref{sec:analysis_tools}
-describes the tool chain we have used to generate and analyze snapshots in
-detail.
+we integrate a snapshotting functionality in Google's Chromium
+\cite{Chromium} virtual machine V8 \cite{V8}. This mechanism periodically
+generates a snapshot of the current \JS heap. We study 11 real-world web
+applications which are similar to those in \cite{JSMeter2009}. Depending on the
+application we analyze different user interactions are performed. The complete
+list of applications and user interactions is presented in Table
+\ref{tab:real_world_apps}. Finally, we analyze the structure and
+distributions of object properties of these snapshots. Section
+\ref{sec:analysis_tools} describes the tool chain we have used to generate and
+analyze snapshots in detail.
 
 The heap snapshots contain objects allocated by the \JS program (called mutator
 in garbage collection terminology) and objects allocated by the virtual
@@ -41,10 +41,10 @@ allocated by a mutator, the so-called mutator heap and Section
 virtual machine, the so-called system heap. Finally, Section
 \ref{sec:analysis_sys_vs_mut} presents differences and similarities of mutator
 and system heap. For both, mutator and virtual machine allocated objects, we
-have analyzed the following properties and their distributions: object type,
-size, lifetime, the number of outgoing edges, and the minimum distance from a
-heap root to a object. This illustrates the allocation behavior of real-world
-web applications and present the overhead of V8.
+analyze the following properties and their distributions: object type, size,
+lifetime, the number of out-going edges, and the minimum distance from a heap
+root to a object. Our analysis illustrates the allocation behavior of
+real-world web applications and present the overhead of V8.
 
 In this work we extend studies on the allocation behavior of real \JS web
 applications \cite{JSMeter2009}. This thesis makes the following contribution:
