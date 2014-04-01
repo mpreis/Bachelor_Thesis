@@ -33,53 +33,6 @@ This section presents some additional tables about the generated heap snapshots.
 	\caption{Heap snapshot edge fields}
 	\label{tap:heap_snapshot_edge_fields}
 \end{table}
-		
-\begin{table}[!h]
-	\centering
-	\begin{tabular}{|l||l|}
-		\hline
-		\textbf{Name} & \textbf{Description} 					\\ \hline \hline
-		context  & A variable from a function context			\\ \hline
-		element  & An element of an array 						\\ \hline
-		property & A named object property						\\ \hline
-		internal &	A link that can't be accessed from JS, thus,\\
-				 & its name isn't a real property name 
-				  	(e.g. parts of a ConsString)				\\ \hline
-		hidden	  & A link that is needed for proper sizes 
-		 			calculation, 								\\
-				  & but may be hidden from user					\\ \hline
-		shortcut  & A link that must not be followed during	
-					sizes calculation							\\ \hline
-		weak 	  &	A weak reference (ignored by the GC)		\\ \hline
-	\end{tabular}
-	\caption{Heap snapshot edge types}
-	\label{tap:heap_snapshot_edge_types}
-\end{table}
-		
-\begin{table}[!htbp]
-	\centering
-	\begin{tabular}{|l||l|}
-		\hline
-		\textbf{Name} & \textbf{Description} 					\\ \hline \hline
-		hidden & Hidden node, may be filtered when shown to user\\ \hline
-		array  & An array of elements							\\ \hline
-		string & A string										\\ \hline
-		object & A JS object (except for arrays and strings)	\\ \hline
-		code   & Compiled code									\\ \hline
-		closure & Function closure								\\ \hline
-		regexp & A regular expression							\\ \hline
-		number & Number stored in the heap						\\ \hline
-		native & Native object 									\\ \hline
-		synthetic & Synthetic object, usually used for grouping 
-					snapshot items together						\\ \hline
-		concatenated string & Concatenated string 
-							(a pair of pointers to strings)		\\ \hline
-		sliced string & Sliced string 
-						(a fragment of another string)			\\ \hline
-	\end{tabular}
-	\caption{Heap snapshot node types}
-	\label{tap:heap_snapshot_node_types}
-\end{table}
 
 \begin{table}[!htbp]
 	\centering
@@ -154,4 +107,51 @@ This section presents some additional tables about the generated heap snapshots.
 	\end{tabular}
 	\caption{Heap snapshot metrics}
 	\label{tap:heap_snapshot_metrics}
+\end{table}
+		
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|l||l|}
+		\hline
+		\textbf{Name} & \textbf{Description} 					\\ \hline \hline
+		context  & A variable from a function context			\\ \hline
+		element  & An element of an array 						\\ \hline
+		property & A named object property						\\ \hline
+		internal &	A link that can't be accessed from JS, thus,\\
+				 & its name isn't a real property name 
+				  	(e.g. parts of a ConsString)				\\ \hline
+		hidden	  & A link that is needed for proper sizes 
+		 			calculation, 								\\
+				  & but may be hidden from user					\\ \hline
+		shortcut  & A link that must not be followed during	
+					sizes calculation							\\ \hline
+		weak 	  &	A weak reference (ignored by the GC)		\\ \hline
+	\end{tabular}
+	\caption{Heap snapshot edge types}
+	\label{tap:heap_snapshot_edge_types}
+\end{table}
+		
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|l||l|}
+		\hline
+		\textbf{Name} & \textbf{Description} 					\\ \hline \hline
+		hidden & Hidden node, may be filtered when shown to user\\ \hline
+		array  & An array of elements							\\ \hline
+		string & A string										\\ \hline
+		object & A JS object (except for arrays and strings)	\\ \hline
+		code   & Compiled code									\\ \hline
+		closure & Function closure								\\ \hline
+		regexp & A regular expression							\\ \hline
+		number & Number stored in the heap						\\ \hline
+		native & Native object 									\\ \hline
+		synthetic & Synthetic object, usually used for grouping 
+					snapshot items together						\\ \hline
+		concatenated string & Concatenated string 
+							(a pair of pointers to strings)		\\ \hline
+		sliced string & Sliced string 
+						(a fragment of another string)			\\ \hline
+	\end{tabular}
+	\caption{Heap snapshot node types}
+	\label{tap:heap_snapshot_node_types}
 \end{table}
