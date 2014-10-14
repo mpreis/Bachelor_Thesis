@@ -6,3 +6,7 @@ x.log
 *.lof
 *.log
 *.toc
+*.nav
+*.out
+*.snm
+*.vrb

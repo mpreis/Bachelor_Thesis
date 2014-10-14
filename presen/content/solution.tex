@@ -1,0 +1,210 @@
+%-------------------------------------------------------------------
+% bachelor thesis - presentation
+%
+% topic: ACDC4JS - How to analyze a JavaScript garbage collector
+%
+% create by: Mario Preishuber
+% create date: 2014, Jan 01.
+%-------------------------------------------------------------------
+\section{Solution}
+
+\begin{frame}
+	\frametitle{Content}
+	\setcounter{tocdepth}{2}
+	\tableofcontents[currentsection]
+\end{frame}
+
+\newcounter{StepCounter}
+\stepcounter{StepCounter}
+
+\subsection{Step \theStepCounter: Get some data}
+\begin{frame}
+	\frametitle{Step \theStepCounter: Get some data}
+	\begin{itemize}
+		\item Get informations about the garbage collector (whitebox)
+		\begin{itemize}
+			\item collection cycle
+			\item quantity of collected memory
+			\item number of collected objects
+			\item type of garbage collection
+		\end{itemize}
+			
+		\pause
+			
+		\item Prepare a simple mutator (blackbox)
+		\begin{itemize}
+			\item Number of allocated objects
+			\item Number of live objects
+			\item Size of an object
+		\end{itemize}
+			
+		\pause
+			
+		\item Wrap system measurements (blackbox)
+		\begin{itemize}
+			\item Execution time
+			\item Real memory (resident set size) 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+	
+%	\stepcounter{StepCounter}
+%	\subsection{Step \theStepCounter: Compare data}
+%	\begin{frame}
+%		\frametitle{Step \theStepCounter: Compare data}
+%		Compare as much as possible of the collected data with an other JavaScript engine.
+%		\begin{itemize}
+%			\item V8 (Google Chrome) vs. Spidermonkey (Mozilla Firefox)
+%		\end{itemize} 
+%		%\center{ \includegraphics[width=18em]{../imgs/acdc_multi_exec_time.eps} }
+%	\end{frame}
+	
+\stepcounter{StepCounter}
+\subsection{Step \theStepCounter: Heap model}
+\begin{frame}
+	\frametitle{Step \theStepCounter: Heap model}
+	\begin{itemize}
+		\item Important for mutator implementation
+		\item Customizations
+		\begin{itemize}
+			\item Custom Chromium binary
+			\item Custom V8 binary
+		\end{itemize}
+			
+		\pause
+			
+		\item Tools for JavaScript heap analysis
+		\begin{itemize}
+			\item AutomatedUserInteraction
+			\item HeapSnapshotAnalyzer
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+	
+\begin{frame}
+	\frametitle{Step \theStepCounter: Heap model}		
+	\includegraphics[width=26em]{../imgs/solution_h_1.pdf}
+\end{frame}
+
+\subsubsection{AutomatedUserInteraction}
+\begin{frame}
+	\frametitle{AutomatedUserInteraction}
+	\begin{itemize}
+		\item Java application
+		\item SeleniumHQ framework for automated user interaction
+		\begin{itemize}
+			\item \href{http://www.seleniumhq.org/}{http://www.seleniumhq.org}
+		\end{itemize}
+		\item Web applications
+		\begin{itemize}
+			\item \textbf{News:} CNN, ESPN, The Economist
+			\item \textbf{Email:} Gmail, Hotmail
+			\item \textbf{Shops:} Ebay, Amazon
+			\item \textbf{Maps:} Google, Bing
+			\item \textbf{Search:} Google, Bing
+			\item \textbf{Social:} Facebook, Google Plus
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+	
+\begin{frame}
+	\frametitle{Step \theStepCounter: Heap model}		
+	\includegraphics[width=26em]{../imgs/solution_h_2.pdf}
+\end{frame}
+
+\subsubsection{Customizations}
+\begin{frame}
+	\frametitle{Customizations}
+	%\begin{columns}
+	%	\begin{column}{.55\linewidth}
+			Custom Chromium binary
+			\begin{itemize}
+				\item Used flags
+				\begin{itemize}
+					\item \texttt{no\_sandbox} 						% Disables the sandbox for all process types that are normally sandboxed.
+				\end{itemize}
+			\end{itemize}
+			
+			Custom V8 binary
+			\begin{itemize}
+				\item New flags
+				\begin{itemize}
+					\item \texttt{automatic\_heap\_snapshots} 		% create heap snapshot automatically every heap-snapshot-interval KBs
+					\item \texttt{heap\_snapshot\_interval} 		% heap snapshot interval in KB
+					\item \texttt{heap\_snapshot\_prefix} 			% prefix for the .heapsnapshot files
+				\end{itemize}
+				\item Used flags
+				\begin{itemize}
+					\item \texttt{gc\_interval} 					% garbage collect after n allocations
+				\end{itemize}
+			\end{itemize}
+	%	\end{column}
+	%	\begin{column}{.35\linewidth}			
+	%		\includegraphics<1>[width=9em]{../imgs/chromium_v.pdf}
+	%	\end{column}
+	%\end{columns}
+\end{frame}
+	
+\begin{frame}
+	\frametitle{Step \theStepCounter: Heap model}		
+	\includegraphics[width=26em]{../imgs/solution_h_3.pdf}
+\end{frame}
+	
+\subsubsection{HeapSnapshotAnalyzer}
+\begin{frame}
+	\frametitle{HeapSnapshotAnalyzer}
+	\begin{itemize}
+		\item Java application
+		\item PostgreSQL 9.3
+		\item Write snapshots into DB
+			
+		\pause
+			
+		\item Heap graph
+		\begin{itemize}
+			 \item Number of leafs
+			 \item Number of nodes
+			 \item Number of edges
+			 \item Number of strongly connected components
+		\end{itemize}
+			
+		\pause 
+			
+		\item Node characteristics
+		\begin{itemize} 
+			 \item In-degree
+			 \item Out-degree
+			 \item Root distance
+			 \item Node size 
+		\end{itemize}
+	\end{itemize} 
+\end{frame}
+	
+\begin{frame}
+	\frametitle{Step \theStepCounter: Heap model}		
+	\includegraphics[width=26em]{../imgs/solution_h.pdf}
+\end{frame}
+	
+\stepcounter{StepCounter}
+\subsection{Step \theStepCounter: JavaScript mutator}
+\begin{frame}
+	\frametitle{Step \theStepCounter: JavaScript mutator}
+%		Develop a universal JavaScript mutator based on the real web application analyzation results.  
+	Develop a 
+	\begin{itemize}
+		\item Universal JavaScript mutator
+		\item Based on the original ACDC implementation.
+	\end{itemize}
+		
+	\pause
+		
+	Extend this mutator
+	\begin{itemize}
+		\item With special features for garbage collector measurements
+		\item Based on the analysis results simulate
+		\begin{itemize}
+			\item real web applications and
+			\item corner cases. 
+		\end{itemize}
+	\end{itemize}
+\end{frame}

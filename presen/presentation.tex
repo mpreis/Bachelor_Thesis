@@ -1,0 +1,65 @@
+%-------------------------------------------------------------------
+% bachelor thesis - presentation
+%
+% topic: ACDC4JS - How to analyze a JavaScript garbage collector
+%
+% create by: Mario Preishuber
+% create date: 2014, Jan 01.
+%-------------------------------------------------------------------
+
+\documentclass[xcolor=x11names,compress]{beamer}
+
+\usetheme[pageofpages=of,
+          alternativetitlepage=true,
+          titlepagelogo=../imgs/uni_sbg_logo_sw.pdf,
+		  ]{Mp}
+\usepackage[american,austrian]{babel}  % language support
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\input{js_syntax_hl.tex}
+\uselanguage{american}
+
+\graphicspath{
+	{../imgs/}
+	{../imgs/plots/}
+}
+
+
+\title{ACDC4JS}
+\subtitle{How to analyze a JavaScript garbage collector}
+\author{Mario Preishuber}
+\institute[]{Department of Computer Sciences \ University of Salzburg}
+\date{January 13, 2014}
+
+\begin{document}
+	\begin{frame}
+		\titlepage
+	\end{frame}
+
+	% \begin{frame}
+	% 	\frametitle{Content}
+	% 	%\setcounter{tocdepth}{1}
+	% 	%\tableofcontents
+	% 	\begin{itemize}
+	% 		\item Performance analysis
+	% 		\item JavaScript memory management benchmark
+	% 		\item Experiments
+	% 	\end{itemize}
+	% \end{frame}
+
+	%-----------------------------------------------------------------------
+	% SECTIONS
+	%-----------------------------------------------------------------------
+	\input{content/relatedwork}	
+	\input{content/intrudoction}	
+	\input{content/problemdef}		
+	%\input{content/solution}
+	\input{content/experiments}
+	%\input{content/measurements}
+	%\input{content/conclusion}	
+	\begin{frame}
+		\frametitle{Thank you for your attention!}
+		\center { \Large{Questions?} }
+	\end{frame}
+\end{document}
