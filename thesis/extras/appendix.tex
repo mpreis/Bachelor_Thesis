@@ -1,0 +1,157 @@
+\section{Appendix}
+
+This section presents some additional tables about the generated heap snapshots.
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|l||l|}
+		\hline
+		\textbf{Field name}	& \textbf{Description} 				\\ \hline \hline
+		type & See Table \ref{tap:heap_snapshot_node_types}			\\ \hline
+		name & A string which names the object. If the object is	\\
+			 & an mutator variable this name is the same as in 		\\
+			 & the mutator (reference to strings array)				\\ \hline	
+		id	 & A unique id given by the virtual machine (V8)		\\ \hline
+		selfsize  & This is the size of the object in byte. 		\\ \hline
+		edgecount &	Number of reference which leaves the object.	\\ \hline	
+	\end{tabular}
+	\caption{Heap snapshot node fields}
+	\label{tap:heap_snapshot_node_fields}
+\end{table}
+		
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|l||l|}
+		\hline
+		\textbf{Field name}	&	\textbf{Description}			\\ \hline \hline
+		type & See Table \ref{tap:heap_snapshot_edge_types}		\\ \hline
+		name\_or\_index & A string which names the edge. 
+							(reference to strings array)		\\	\hline
+		to\_node		& It is the pointer to the child node. 
+							(reference to nodes array)			\\	\hline 
+	\end{tabular}
+	\caption{Heap snapshot edge fields}
+	\label{tap:heap_snapshot_edge_fields}
+\end{table}
+
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|l||l|}
+		\hline
+		\textbf{Name}	&	\textbf{Description}				\\ \hline \hline
+		number of nodes & Each snapshot contains a field 
+						  called \texttt{node\_count}.  			\\
+						& The \texttt{node\_count} field is equal 
+						  with \texttt{number of nodes} and			\\
+						& shows how many nodes the heap currently 
+						  contains. The \texttt{nodes\_count} 		\\
+						& field is also an property of the table
+						  \texttt{snapshots} and exists once		\\
+						& per snapshot.								\\ \hline
+		number of edges	& This is the same as \texttt{number of nodes} 
+						  only for edges. Each snapshot 			\\
+						& contains a field \texttt{edge\_count}. 
+						  The \texttt{edge\_count} field is 		\\
+						& equal with number of edges and shows how 
+						  many edges the heap currently 			\\
+						& contains. The \texttt{edge\_count} field 
+						  is also an property of the table 			\\
+						& \texttt{snapshots} and exists once per 
+						  snapshot.									\\ \hline
+		number of leafs	& The \texttt{number of leaves} is computed 
+						  as followed: scan all nodes of a 			\\
+						& snapshot and count those without children. 
+						  Each node has a property called 			\\
+						& \texttt{edge\_count} this value is 
+						  different from the \texttt{edge\_count} 	\\
+						& of a snapshot, only the name is the same. 
+						  A node has no children if the 			\\
+						& \texttt{edge\_count} is zero, because the
+						  \texttt{edge\_count} field 				\\
+						& contains the number of leaving edges. The
+						  \texttt{edge\_count} field it 			\\
+						& an property of the \texttt{nodes} table.	\\ \hline
+		outdegree		& As explained before each node has a 
+						  property \texttt{edge\_count} which 		\\
+						& shows the number of leaving edges. 
+						  The number of leaving edges is the same 	\\
+						& as the outdegree of a node, so it follows 
+						  that \texttt{edge\_count} is also 		\\
+						& equal with the outdegree of a node. By 
+						  using some aggregations of SQL it is 		\\
+						& easy to compute the maximum, minimum and 
+						  average number of leaving edges. 			\\
+						& The \texttt{edge\_count} field it an 
+						  property of the \texttt{nodes} table.		\\ \hline
+		indegree		& The \texttt{indgeree} of a node is 
+						  computed before inserting the data into	\\
+						& the database. For each node in the 
+						  snapshot is counted how many other nodes	\\
+						& have a reference to this.					\\ \hline
+		selfsize		& The \texttt{selfsize} is a property of a 
+						  node in the snapshot and is 				\\
+						& computed by the V8 snapshotting mechanism. 
+						   It shows the size of a node in			\\
+						& byte.										\\ \hline 
+		rootdistance	& The \texttt{rootdistance} is an property 
+						  of the \texttt{node} table and is 		\\
+						& computed for each node before it is 
+						  inserted in the database. 				\\
+						& The rootdistance is the shortest path from 
+						   any root to a node.						\\ \hline
+		strongly		& To find strongly connected components in 
+						  the heap graph the Tarjan's 				\\ 
+		connected		& strongly connected components
+			 			  algorithm\cite{Trajan} is used.			\\
+		components		&											\\ \hline
+	\end{tabular}
+	\caption{Heap snapshot metrics}
+	\label{tap:heap_snapshot_metrics}
+\end{table}
+		
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|l||l|}
+		\hline
+		\textbf{Name} & \textbf{Description} 					\\ \hline \hline
+		context  & A variable from a function context			\\ \hline
+		element  & An element of an array 						\\ \hline
+		property & A named object property						\\ \hline
+		internal &	A link that can't be accessed from JS, thus,\\
+				 & its name isn't a real property name 
+				  	(e.g. parts of a ConsString)				\\ \hline
+		hidden	  & A link that is needed for proper sizes 
+		 			calculation, 								\\
+				  & but may be hidden from user					\\ \hline
+		shortcut  & A link that must not be followed during	
+					sizes calculation							\\ \hline
+		weak 	  &	A weak reference (ignored by the GC)		\\ \hline
+	\end{tabular}
+	\caption{Heap snapshot edge types}
+	\label{tap:heap_snapshot_edge_types}
+\end{table}
+		
+\begin{table}[!htbp]
+	\centering
+	\begin{tabular}{|l||l|}
+		\hline
+		\textbf{Name} & \textbf{Description} 					\\ \hline \hline
+		hidden & Hidden node, may be filtered when shown to user\\ \hline
+		array  & An array of elements							\\ \hline
+		string & A string										\\ \hline
+		object & A JS object (except for arrays and strings)	\\ \hline
+		code   & Compiled code									\\ \hline
+		closure & Function closure								\\ \hline
+		regexp & A regular expression							\\ \hline
+		number & Number stored in the heap						\\ \hline
+		native & Native object 									\\ \hline
+		synthetic & Synthetic object, usually used for grouping 
+					snapshot items together						\\ \hline
+		concatenated string & Concatenated string 
+							(a pair of pointers to strings)		\\ \hline
+		sliced string & Sliced string 
+						(a fragment of another string)			\\ \hline
+	\end{tabular}
+	\caption{Heap snapshot node types}
+	\label{tap:heap_snapshot_node_types}
+\end{table}
